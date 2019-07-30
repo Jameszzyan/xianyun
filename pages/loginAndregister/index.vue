@@ -1,6 +1,6 @@
 <template>
-    <div>
-        
+    <div class="login">
+
     </div>
 </template>
 
@@ -13,3 +13,5 @@ export default {
 <style lang="less" scoped>
 
 </style>
+
+
