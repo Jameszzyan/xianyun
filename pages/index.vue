@@ -29,7 +29,21 @@
 </template>
 
 <script>
+// import axios from 'axios'
+// axios.defaults.baseURL = 'http://127.0.0.1:1337'
 export default {
+  // 初始化之前异步请求数据
+  // async asyncData(context){
+  //   let result = await axios({
+  //     url:'/scenics/banners',
+  //     method:'get'
+  //   })
+  //   let {data} = result.data
+  //   console.log(context)
+  //   return {
+  //     carouselList:data
+  //   }
+  // },
   data() {
     return {
       carouselList: [],
@@ -62,6 +76,7 @@ export default {
     }
   },
   mounted() {
+    // 请求轮播图所需图片的地址
     this.$axios({
       url: "/scenics/banners",
       method: "get"
@@ -69,7 +84,6 @@ export default {
       .then(result => {
         let { data } = result.data;
         this.carouselList = data;
-        console.log(this.$axios.defaults.baseURL);
       })
       .catch(err => {
         console.log(err);

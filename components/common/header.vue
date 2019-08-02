@@ -4,7 +4,7 @@
       <el-row type="flex" :gutter="20">
         <el-col :span="4">
           <nuxt-link to="/">
-            <img src="../../assets/image/logo.jpg" alt class="logo" />
+            <img src="~assets/images/logo.jpg" class="logo" />
           </nuxt-link>
         </el-col>
         <el-col :span="16">
@@ -25,7 +25,23 @@
           </el-row>
         </el-col>
         <el-col :span="4">
-          <nuxt-link to="/loginAndregister">
+          <el-dropdown v-if="$store.state.user.userInfo.token">
+             <div>
+               <img :src="$axios.defaults.baseURL+$store.state.user.userInfo.user.defaultAvatar" alt="" class="avatar">
+               <span>{{$store.state.user.userInfo.user.nickname}}
+                 <i class="el-icon-arrow-down el-icon--right"></i>
+               </span>
+             </div>
+             <el-dropdown-menu slot="dropdown">
+               <el-dropdown-item>
+                 <nuxt-link to="/user/personal">个人中心</nuxt-link>
+               </el-dropdown-item>
+               <el-dropdown-item @click.native="handleClick">
+                 退出
+               </el-dropdown-item>
+             </el-dropdown-menu>
+          </el-dropdown>
+          <nuxt-link to="/user" v-else>
             <div>登录/注册</div>
           </nuxt-link>
         </el-col>
@@ -38,6 +54,11 @@
 export default {
   data() {
     return {};
+  },
+  methods:{
+    handleClick(){
+      this.$store.dispatch('user/commitClearUserInfo')
+    }
   }
 };
 </script>
@@ -77,6 +98,12 @@ export default {
         background: #409eff;
         color: #fff !important;
       }
+    }
+    .avatar{
+      vertical-align: middle;
+      height:32px;
+      width:32px;
+      border-radius:50%;
     }
   }
 }
