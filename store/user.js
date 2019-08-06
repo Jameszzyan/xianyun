@@ -12,7 +12,6 @@ export const mutations = {
     clearUserInfo(state){
         state.userInfo.token = ''
         state.userInfo.user = {}
-        localStorage.removeItem('store')
     }
 }
 

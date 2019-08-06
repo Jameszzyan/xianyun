@@ -167,6 +167,7 @@ export default {
       }
       else{
          this.ticketForm.departDate = moment(this.ticketForm.departDate).format("YYYY-MM-DD")
+         this.$store.dispatch('history/commitStoreHistory',this.ticketForm)
          this.$axios({
            url:'/airs',
            method:'get',

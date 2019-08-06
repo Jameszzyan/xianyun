@@ -58,6 +58,7 @@ export default {
   methods:{
     handleClick(){
       this.$store.dispatch('user/commitClearUserInfo')
+      // localStorage.removeItem('store')
     }
   }
 };
