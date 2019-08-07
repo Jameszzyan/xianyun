@@ -175,23 +175,20 @@ export default {
 
     // 提交订单
     async handleSubmit() {
-      var arr = new Array(this.order.users.length)
-      for(var i = 0; i < arr.length; i++){
-          arr[i] = i
-      }
-      for (const index of arr) {
-        try {
-          let contactResult = await this.$refs["userForm" + index].validate();
+      for(var index = 0; index < this.order.users.length; index++){
+          try {
+          let contactResult = await this.$refs["userForm" + index][0].validate();
         } catch (err) {
           if (!err) {
             this.$alert("请完善乘机人信息", "提示", {
               confirmButtonText: "确定",
               type: "warn"
-            });
+            })
             return
           }
         }
       }
+     
 
       try {
         let result = await this.$refs.contactForm.validate();
@@ -216,7 +213,13 @@ export default {
               Authorization: `Bearer ${userInfo.token || 'NO TOKEN'}`
           }
       }).then(result=>{
-          console.log(result)
+        console.log(result)
+          this.$router.push({
+            path:'/planeTicket/pay',
+            query:{
+              id:result.data.data.id
+            }
+          })
       }).catch(err=>{
           console.log(err)
       })
